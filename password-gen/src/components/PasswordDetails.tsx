@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   RangeSlider,
   RangeSliderTrack,
@@ -24,10 +24,15 @@ interface formDatas {
   Symbols?: Boolean;
 }
 
-export const PasswordDetails = ({ PasswordSetter }: FunctionInterface) => {
+export const PasswordDetails = ({ PasswordSetter,password }: FunctionInterface) => {
   const [length, setLength] = useState(6);
   const [formData, setFormData] = useState<formDatas>();
+  const [strength, setStrength] = useState(0)
   const toast = useToast();
+
+  useEffect(() => {
+    passwordValue();
+  }, [password]);
 
   const setForm = (e: any) => {
     console.log("values", e.target);
@@ -55,7 +60,7 @@ export const PasswordDetails = ({ PasswordSetter }: FunctionInterface) => {
       });
     }
 
-    console.log("listhere", chars);
+   
     for (var i = 0; i <= length; i++) {
       var randomNumber = Math.floor(Math.random() * chars.length);
       newPassword += chars.substring(randomNumber, randomNumber + 1);
@@ -67,7 +72,18 @@ export const PasswordDetails = ({ PasswordSetter }: FunctionInterface) => {
     }
   };
 
-  console.log("daya", formData);
+const passwordValue = () =>{
+  let strength = 0
+  length >8 ? strength ++:''
+  formData?.uppercase ? strength++ : ''
+  formData?.lowercase ? strength++ : ''
+  formData?.Numbers ? strength++ : ''
+  formData?.Symbols ? strength++ : ''
+
+  setStrength(strength)
+  return strength
+}
+
   return (
     <div className="  mx-auto">
       <h2> Character Length</h2>
@@ -117,7 +133,7 @@ export const PasswordDetails = ({ PasswordSetter }: FunctionInterface) => {
             </Checkbox>
           </Stack>
         </CheckboxGroup>
-        <PasswordStrength />
+        <PasswordStrength strength = {strength} />
         <button
           onClick={GeneratePassword}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded"
