@@ -24,18 +24,20 @@ interface formDatas {
   Symbols?: Boolean;
 }
 
-export const PasswordDetails = ({ PasswordSetter,password }: FunctionInterface) => {
+export const PasswordDetails = ({
+  PasswordSetter,
+  password,
+}: FunctionInterface) => {
   const [length, setLength] = useState(6);
   const [formData, setFormData] = useState<formDatas>();
-  const [strength, setStrength] = useState(0)
+  const [strength, setStrength] = useState(0);
   const toast = useToast();
 
   useEffect(() => {
     passwordValue();
-  }, [password]);
+  }, [password, formData]);
 
   const setForm = (e: any) => {
-    console.log("values", e.target);
     setFormData((previous) => ({
       ...previous,
       [e.target.name]: e.target.checked,
@@ -50,8 +52,8 @@ export const PasswordDetails = ({ PasswordSetter,password }: FunctionInterface) 
     let chars = lower + upper + number + symbol;
     let newPassword = "";
 
-    if(chars.length < 6){
-      return  toast({
+    if (chars.length < 6) {
+      return toast({
         title: "Error ",
         description: "Tick at least 1 checkbox",
         status: "warning",
@@ -60,29 +62,27 @@ export const PasswordDetails = ({ PasswordSetter,password }: FunctionInterface) 
       });
     }
 
-   
     for (var i = 0; i <= length; i++) {
       var randomNumber = Math.floor(Math.random() * chars.length);
       newPassword += chars.substring(randomNumber, randomNumber + 1);
     }
-    console.log("abeg", newPassword);
 
     if (PasswordSetter) {
       PasswordSetter(newPassword);
     }
   };
 
-const passwordValue = () =>{
-  let strength = 0
-  length >8 ? strength ++:''
-  formData?.uppercase ? strength++ : ''
-  formData?.lowercase ? strength++ : ''
-  formData?.Numbers ? strength++ : ''
-  formData?.Symbols ? strength++ : ''
+  const passwordValue = () => {
+    let strength = 0;
+    length > 8 ? strength++ : "";
+    formData?.uppercase ? strength++ : "";
+    formData?.lowercase ? strength++ : "";
+    formData?.Numbers ? strength++ : "";
+    formData?.Symbols ? strength++ : "";
 
-  setStrength(strength)
-  return strength
-}
+    setStrength(strength);
+    return strength;
+  };
 
   return (
     <div className="  mx-auto">
@@ -115,11 +115,7 @@ const passwordValue = () =>{
           // defaultValue={["uppercase", "lowercase"]}
         >
           <Stack spacing={[1, 5]} direction={["column"]}>
-            <Checkbox
-              value="uppercase"
-              name="uppercase"
-              onChange={setForm}
-            >
+            <Checkbox value="uppercase" name="uppercase" onChange={setForm}>
               Include Uppercase Letters
             </Checkbox>
             <Checkbox value="lowercase" onChange={setForm} name="lowercase">
@@ -133,7 +129,7 @@ const passwordValue = () =>{
             </Checkbox>
           </Stack>
         </CheckboxGroup>
-        <PasswordStrength strength = {strength} />
+        {password && <PasswordStrength strength={strength} />}
         <button
           onClick={GeneratePassword}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded"

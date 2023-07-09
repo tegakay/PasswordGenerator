@@ -6,7 +6,7 @@ import { PasswordField } from "./components/PasswordField";
 import Header from "./components/Header";
 
 function App() {
-  const [Password, setPassword] = useState("Password Shows Here");
+  const [Password, setPassword] = useState("");
 
   const Passwordset = (pwod: string) => {
     setPassword(pwod);
