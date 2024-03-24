@@ -11,11 +11,14 @@ import {
 import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
 import { PasswordStrength } from "./PasswordStrength";
 import { useToast } from "@chakra-ui/react";
+import { useContext } from "react";
+ 
+import { PasswordContext } from "../context/usePasswordContext";
 
-interface FunctionInterface {
-  PasswordSetter?: Function;
-  password?: string;
-}
+// interface FunctionInterface {
+//   PasswordSetter?: Function;
+//   password?: string;
+// }
 
 interface formDatas {
   uppercase?: Boolean;
@@ -24,14 +27,16 @@ interface formDatas {
   Symbols?: Boolean;
 }
 
-export const PasswordDetails = ({
-  PasswordSetter,
-  password,
-}: FunctionInterface) => {
+export const PasswordDetails = () => {
   const [length, setLength] = useState(6);
   const [formData, setFormData] = useState<formDatas>();
   const [strength, setStrength] = useState(0);
   const toast = useToast();
+
+  let duf =  useContext(PasswordContext)
+  let password = duf?.Password
+  let PasswordSetter = duf?.Passwordset
+  
 
   useEffect(() => {
     passwordValue();
@@ -83,6 +88,8 @@ export const PasswordDetails = ({
     setStrength(strength);
     return strength;
   };
+
+
 
   return (
     <div className="  mx-auto">

@@ -1,11 +1,19 @@
 import { BsFillClipboard2Fill } from "react-icons/bs";
 import { useToast } from "@chakra-ui/react";
+import {useContext} from "react"
 
-interface text {
-  password?: string;
-}
+import { PasswordContext } from "../context/usePasswordContext";
 
-export const PasswordField = ({ password }: text) => {
+// interface text {
+//   password?: string;
+// }
+
+export const PasswordField = () => {
+
+  let Passwod =  useContext(PasswordContext)
+  let password = Passwod?.Password
+ 
+
   const toast = useToast();
   const copyText = () => {
     navigator.clipboard.writeText(password ? password : "");
