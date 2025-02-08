@@ -1,4 +1,5 @@
-import { LuRectangleVertical } from "react-icons/Lu";
+import { LuRectangleVertical } from "react-icons/lu";
+
 
 interface strengthProp {
   strength?: number;

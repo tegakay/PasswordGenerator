@@ -139,7 +139,7 @@ export const PasswordDetails = () => {
         {password && <PasswordStrength strength={strength} />}
         <button
           onClick={GeneratePassword}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-2 rounded"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded shadow-sm"
         >
           Generate Password
         </button>
