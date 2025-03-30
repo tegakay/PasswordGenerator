@@ -94,7 +94,7 @@ export const PasswordDetails = () => {
   return (
     <div className="  mx-auto">
       <h2> Character Length</h2>
-      <div className="flex mx-auto gap-6">
+      <div className="flex space-y-4 mx-auto ">
         <RangeSlider
           aria-label={["min", "max"]}
           defaultValue={[6, 8]}

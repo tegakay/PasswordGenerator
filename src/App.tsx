@@ -10,12 +10,13 @@ function App() {
 
   return (
     <PasswordContextProvider>
-      <div className="flex flex-col gap-2 content-center justify-center align-center mx-auto w-72 text-center space-y-4 py-4  ">
+      <div className="flex flex-col gap-2 content-center justify-center align-center mx-auto  text-center space-y-4 py-4  ">
       <Header/>
-      {/* <PasswordField password={Password} />
-      <PasswordDetails PasswordSetter={Passwordset} password={Password} /> */}
+      
+      <div className="mx-auto max-w-2xl flex flex-col space-y-4">
       <PasswordField  />
       <PasswordDetails />
+      </div>
     </div>
     </PasswordContextProvider>
   );

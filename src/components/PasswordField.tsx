@@ -26,7 +26,7 @@ export const PasswordField = () => {
   };
 
   return (
-    <div className="flex justify-around ">
+    <div className="flex justify-between items-center max-w-xl mx-auto  ">
       <input
         type="text"
         id="first_name"
